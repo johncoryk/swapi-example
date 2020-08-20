@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+
+import CharacterContainer from './components/CharacterContainer';
 
 function App() {
+  const [character, setCharacter] = useState({});
+  const [count, setCount] = useState(1);
+
+  const getCharacterData = () => {
+    fetch(`https://swapi.dev/api/people/${count}/`)
+      .then(res => res.json())
+      .then(data => setCharacter(data));
+  };
+
+  useEffect(() => {
+    getCharacterData();
+    // eslint-disable-next-line
+  }, [character]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <CharacterContainer characterInfo={character} />
+      <div className='buttons'>
+        <button
+          className='btn'
+          onClick={() => setCount(count > 1 ? count - 1 : count)}
         >
-          Learn React
-        </a>
-      </header>
+          Decrement
+        </button>
+        <button className='btn' onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+      </div>
     </div>
   );
 }
