@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import CharacterContainer from './components/CharacterContainer';
+import './styles/style.css';
 
 function App() {
   const [character, setCharacter] = useState({});
@@ -19,17 +20,19 @@ function App() {
 
   return (
     <div>
-      <CharacterContainer characterInfo={character} />
-      <div className='buttons'>
-        <button
-          className='btn'
-          onClick={() => setCount(count > 1 ? count - 1 : count)}
-        >
-          Decrement
-        </button>
-        <button className='btn' onClick={() => setCount(count + 1)}>
-          Increment
-        </button>
+      <div className='main-contain'>
+        <CharacterContainer characterInfo={character} />
+        <div className='buttons'>
+          <button
+            className='btn'
+            onClick={() => setCount(count > 1 ? count - 1 : count)}
+          >
+            Decrement
+          </button>
+          <button className='btn' onClick={() => setCount(count + 1)}>
+            Increment
+          </button>
+        </div>
       </div>
     </div>
   );
